@@ -5,7 +5,7 @@ import Info from "./comps/info";
 import PokForm from "./comps/pokForm";
 import PokCard from "./comps/pokCard";
 
-
+var page = 0;
 
 class App extends React.Component{
 
@@ -14,11 +14,14 @@ class App extends React.Component{
     results: [] }
   }
 
+  
+
   gettingPoks = async (e) => {
     e.preventDefault();
 
     const hMany = e.target.elements.hManyPoks.value;
-    const page = e.target.elements.pagePoks.value;
+    page = Number(e.target.elements.pagePoks.value);
+
     const api_url = await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${page}&limit=${hMany}`);
     const data = await api_url.json();
 
@@ -36,7 +39,7 @@ class App extends React.Component{
   render(){
 
     const {results} = this.state.data;
-
+    console.log(page);
 
     return(
       <div>
@@ -46,9 +49,9 @@ class App extends React.Component{
           <ul>
             {results.map((result, i) => {
               const { name } = result;
-
+              const id = ++i + page;
               return (
-                <PokCard name={name} id={i+1} />
+                <PokCard name={name} id={id} />
               )
             })}
           </ul>
