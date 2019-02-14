@@ -1,0 +1,66 @@
+/* .pok_list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30%;
+    width: calc(33.33% - 8px);
+    height: 600px;
+    padding: 10px;
+    background-color: #BFF9FF;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: auto;
+} */
+.pok_list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 50%;
+  height: 500px;
+  border: 1px solid gold;
+  overflow-y: auto;
+}
+.pok_list_pokCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 10px;
+  flex-basis: 33.333%;
+  width: 33.333%;
+  height: 250px;
+  text-align: center;
+  background-color: #eee;
+  transition: background-color 220ms ease;
+}
+
+@media screen and (max-width: 996px) {
+  .pok_list_pokCard {
+    flex-basis: 100%;
+    width: 100%;
+  }
+  .pok_list {
+    width: 100%;
+  }
+  .pokCardImg {
+    size: 180px;
+  }
+}
+
+.pokCard:hover {
+  background-color: cornflowerblue;
+}
+
+.cardName {
+  text-align: center;
+}
+
+.pokCard:hover {
+  border: 4px solid rgb(0, 0, 0);
+}
+
+/* .pokCard{
+    border: 4px solid transparent;
+    border-radius: 10px;
+} */

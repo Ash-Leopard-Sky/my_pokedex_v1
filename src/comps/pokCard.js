@@ -1,30 +1,31 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
+class PokCard extends React.Component {
+  static propTypes = {
+    name: PropTypes.string,
+    id: PropTypes.string,
+    getPokInf: PropTypes.func.isRequired
+  };
 
+  onClick = e => {
+    this.props.getPokInf(e, this.props.id);
+  };
 
+  render() {
+    const { name, id } = this.props;
 
+    return (
+      <div className="pokCard pok_list_pokCard" onClick={this.onClick} id={id}>
+        <img
+          className="pokCardImg"
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        />
 
-class PokCard extends React.Component{
-  render(){
-    const { name, id, d } = this.props
-    
-    return(
-      <div className="pokeCard" id={id}>
-        <div className="cardName">
-          {name}
-        </div>
-        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${(id)}.png`}/>
+        <div className="cardName">{name}</div>
       </div>
-    )
+    );
   }
 }
-
-
-
-PokCard.propTypes = {
-  name: PropTypes.string,
-  id: PropTypes.string
-};
 
 export default PokCard;
