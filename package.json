@@ -2,7 +2,7 @@
   "name": "my_pokedex_v1",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Ash-Leopard-Sky.github.com/my_pokedex_v1",
+  "homepage": "https://ash-leopard-sky.github.io/my_pokedex_v1",
   "dependencies": {
     "react": "^16.8.2",
     "react-dom": "^16.8.2",
