@@ -1,5 +1,7 @@
 import React from "react";
+import Select from 'react-select';
 import "./App.css";
+import isEquals from './utils/isEquals';
 
 import PokInfo from "./comps/pokInfo";
 import PokForm from "./comps/pokForm";
@@ -13,7 +15,8 @@ class App extends React.Component {
       results: []
     },
     page: 0,
-    pokemon: {}
+    pokemon: {},
+    matchName:""
   };
 
   gettingPoks = async e => {
@@ -30,9 +33,9 @@ class App extends React.Component {
     );
     const data = await api_url.json();
 
-    data.results.forEach(element => {
-      console.log(element);
-    });
+    // data.results.forEach(element => {
+    //   console.log(element);
+    // });
 
     console.log(data);
 
@@ -41,7 +44,13 @@ class App extends React.Component {
     });
   };
 
-  getPokInfo = async (e, id) => {
+  onChangeSearchBox = (matchName) => {
+    this.setState({
+      matchName
+    })
+  }
+
+  getPokInfo = (e, id) => {
     e.preventDefault();
 
     fetch(`http://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -55,19 +64,26 @@ class App extends React.Component {
       })
       .catch(err => console.log(err));
   };
+
+  filterByName = ( name , matchName) => {
+    return name.toLowerCase().indexOf(matchName.toLowerCase()) !== -1;
+  }
+
   render() {
-    const { page, pokemon } = this.state;
+    const { page, pokemon, matchName } = this.state;
     const { results } = this.state.data;
-    console.log(page);
+    console.log(matchName);
 
     return (
       <div>
-        <PokForm poks={this.gettingPoks} />
+        <PokForm poks={this.gettingPoks} onChangeSearchBox={this.onChangeSearchBox} matchName={matchName} />
         {results && (
           <section className="pok_list">
-            {results.map((result, i) => {
-              const { name } = result;
-              const id = ++i + page;
+            {results.filter(({ name }) => this.filterByName(name, matchName)).map((result, i) => {
+              const { name, url } = result;
+              // const id = ++i + page;
+              const stuff = url.split("/");
+              const id = Number(stuff[stuff.length - 2]);
               return (
                 <PokCard
                   getPokInf={this.getPokInfo}
