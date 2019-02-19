@@ -5,11 +5,11 @@ class PokCard extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
-    getPokInf: PropTypes.func.isRequired
+    getPokInfo: PropTypes.func.isRequired
   };
 
   onClick = e => {
-    this.props.getPokInf(e, this.props.id);
+    this.props.getPokInfo(e, this.props.id);
   };
 
   render() {
